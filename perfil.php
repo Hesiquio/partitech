@@ -6,8 +6,8 @@ if (!isset($_SESSION['loggedin'])) {
     header('Location: index.html');
     exit;
 }
-$stmt = $con->prepare('SELECT password, email FROM accounts WHERE id = ?');
-$stmt->bind_param('i', $_SESSION['id']);
+$stmt = $con->prepare('SELECT password, email FROM cuentas WHERE id_user = ?');
+$stmt->bind_param('i', $_SESSION['id_user']);
 $stmt->execute();
 $stmt->bind_result($password, $email);
 $stmt->fetch();
@@ -25,10 +25,14 @@ $stmt->close();
 </head>
 <body class="loggedin">
     <nav class="navtop">
-        <h1 style="color:white;">Sistema de PHP Básico</h1>
-        <a href="inicio.php" style="color:white;">Inicio</a>
-        <a href="perfil.php" style="color:white;"><i class="fas fa-user-circle"></i>Información de Usuario</a>
-        <a href="cerrar-sesion.php" style="color:white;"><i class="fas fa-sign-out-alt"></i>Cerrar Sesion</a>
+        <div class="header">
+            <h1 style="color:white; margin-right: 20px;">PartiTech</h1>
+            <div class="nav-links">
+                <a href="inicio.php" class="nav-link">Inicio</a>
+                <a href="listagrupos.php" class="nav-link">Grupos</a>
+                <a href="cerrar-sesion.php" class="nav-link">Cerrar Sesión</a>
+            </div>
+        </div>
     </nav>
     <div class="content">
         <h2>Información del Usuario</h2>
@@ -48,6 +52,5 @@ $stmt->close();
             </table>
         </div>
     </div>
-    </nav>
 </body>
 </html>

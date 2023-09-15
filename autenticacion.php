@@ -10,7 +10,7 @@ if (!isset($_POST['username'], $_POST['password'])) {
     header('Location: index.html');
 }
 // evitar inyección sql
-if ($stmt = $con->prepare('SELECT id,password FROM accounts WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT id_user,password FROM cuentas WHERE username = ?')) {
     // parámetros de enlace de la cadena s
     $stmt->bind_param('s', $_POST['username']);
     $stmt->execute();
@@ -18,7 +18,7 @@ if ($stmt = $con->prepare('SELECT id,password FROM accounts WHERE username = ?')
 // acá se valida si lo ingresado coincide con la base de datos
 $stmt->store_result();
 if ($stmt->num_rows > 0) {
-    $stmt->bind_result($id, $password);
+    $stmt->bind_result($id_user, $password);
     $stmt->fetch();
     // se confirma que la cuenta existe ahora validamos la contraseña
     if ($_POST['password'] === $password) {
@@ -26,7 +26,7 @@ if ($stmt->num_rows > 0) {
         session_regenerate_id();
         $_SESSION['loggedin'] = TRUE;
         $_SESSION['name'] = $_POST['username'];
-        $_SESSION['id'] = $id;
+        $_SESSION['id_user'] = $id_user;
         header('Location: inicio.php');
     }
 } else {
