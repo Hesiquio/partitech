@@ -104,7 +104,7 @@ if (!isset($_SESSION['loggedin'])) {
                 echo "<td>{$row['numero_est']}</td>";
                 echo "<td>{$row['prof_autor']}</td>";
                 // Agrega una nueva celda con un enlace para editar actividades
-                echo "<td><a href='editar_actividades.php?id_grupo={$row['id_grupo']}'>Editar</a></td>";
+                echo "<td><a href='edit_act.php?id_grupo={$row['id_grupo']}'>Editar</a></td>";
                 echo "</tr>";
             }
             echo "</tbody>";

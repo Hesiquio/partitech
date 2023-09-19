@@ -43,6 +43,37 @@ if (isset($_GET['id_grupo'])) {
         </div>
     </nav>
     <div class="content">
+        <h3>Agregar Nueva Actividad</h3>
+        <!-- Formulario para insertar datos en la tabla actividades -->
+        <?php
+        if (isset($_GET['mensaje'])) {
+            echo "<p style='color: green;'>" . $_GET['mensaje'] . "</p>";
+        }
+        if (isset($_GET['error'])) {
+            echo "<p style='color: red;'>" . $_GET['error'] . "</p>";
+        }
+        ?>
+        <form method="POST" action="reg_act.php" class="form-horizontal">
+            <input type="hidden" name="id_grupo" value="<?php echo $id_grupo; ?>"> <!-- Campo oculto para el id_grupo -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Nombre de la Actividad:</th>
+                    <th>Descripción de la Actividad:</th>
+                    <th>Número de Estudiantes:</th>
+                    <th>Enviar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="text" class="form-control" name="nombre_actividad" required></td>
+                    <td><input type="text" class="form-control" name="desc_actividad" required></td>
+                    <td><input type="number" class="form-control" name="numero_est" required></td>
+                    <td><input type="submit" class="btn btn-primary" value="Guardar"></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
         <h2>Editar Actividades del Grupo: <?php echo $nombre_grupo; ?></h2>
         <!-- Mostrar la tabla de actividades -->
         <?php
@@ -70,7 +101,6 @@ if (isset($_GET['id_grupo'])) {
                 echo "<td>{$row['id_actividad']}</td>";
                 echo "<td>{$row['nombre_actividad']}</td>";
                 echo "<td>{$row['desc_actividad']}</td>";
-                echo "<td>{$row['id_grupo']}</td>";
                 echo "<td>{$row['numero_est']}</td>";
                 echo "<td>{$row['prof_autor']}</td>";
                 echo "</tr>";

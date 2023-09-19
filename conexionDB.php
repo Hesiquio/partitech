@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "1234abc.";
-$database = "ismachidos";
+$database = "partitech";
 // Crear una conexión a la base de datos
 $con = new mysqli($servername, $username, $password, $database);
 // Verificar si la conexión fue exitosa
