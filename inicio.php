@@ -79,7 +79,8 @@ if (!isset($_SESSION['loggedin'])) {
             echo "<th>Apellido Materno</th>";
             echo "<th>Apellido Paterno</th>";
             echo "<th>Grupo</th>";
-            echo "<th>Prof_Autor</th>";
+            echo "<th>Profito</th>";
+            echo "<th>Acciones</th>";
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
@@ -90,7 +91,17 @@ if (!isset($_SESSION['loggedin'])) {
                 echo "<td>{$row['apellidomat']}</td>";
                 echo "<td>{$row['apellidopat']}</td>";
                 echo "<td>{$row['grupo']}</td>";
-                echo "<td>{$row['prof_autor']}</td>";
+                // Obtener el nombre del profesor utilizando el ID almacenado en $row['prof_autor']
+                $profesorID = $row['prof_autor'];
+                $query = "SELECT username FROM cuentas WHERE id_user = ?";
+                $stmt = $con->prepare($query);
+                $stmt->bind_param('i', $profesorID);
+                $stmt->execute();
+                $stmt->bind_result($nombreProfesor);
+                $stmt->fetch();
+                $stmt->close();
+                echo "<td>{$nombreProfesor}</td>";
+                echo "<td><a href='editar.php?id={$row['id_estudiante']}'><img src='btneditar.png' alt='Editar'></a>   <a href='eliminar.php?id={$row['id_estudiante']}'><img src='btneliminar.png' alt='Eliminar'></a></td>";
                 echo "</tr>";
             }
             echo "</tbody>";
